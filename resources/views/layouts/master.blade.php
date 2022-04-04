@@ -45,16 +45,16 @@
                         App
                     </li>
                     <li>
-                        <a href="{{ route('login') }}" class="active"><i class="material-icons">dashboard</i>Dashboard</a>
+                        <a href="{{ route('home') }}" class="active"><i class="material-icons">dashboard</i>Dashboard</a>
                     </li>
                     <li class="sidebar-title">
                         Office
                     </li>
                     <li>
-                        <a href="{{ route('login') }}"><i class="material-icons">domain</i>Departments</a>
+                        <a href="{{ route('departments') }}"><i class="material-icons">domain</i>Departments</a>
                     </li>
                     <li>
-                        <a href="{{ route('login') }}"><i class="material-icons">badge</i>Employees</a>
+                        <a href="{{ route('employees') }}"><i class="material-icons">badge</i>Employees</a>
                     </li>
                     <li class="sidebar-title">
                         EMS Management
