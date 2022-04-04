@@ -15,6 +15,17 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
+            $table->string('empid');
+            $table->string('emp_name');
+            $table->string('dept_id');
+            $table->string('emp_designation');
+            $table->string('emp_current_post');
+            $table->string('emp_cadre');
+            $table->string('emp_salary');
+            $table->string('emp_do_initial_appoinmnet');
+            $table->string('emp_dob');
+            $table->string('emp_dor');
+            $table->string('emp_pic_url');
             $table->timestamps();
         });
     }
