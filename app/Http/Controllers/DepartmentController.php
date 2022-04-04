@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
@@ -13,7 +14,8 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        return view('admin.departments.index');
+        $departments = Department::get();
+        return view('admin.departments.index', ['departments'=>$departments, 'i'=>1]);
     }
 
     /**
@@ -34,7 +36,16 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $department = new Department();
+        $department->dept_id = date('d').substr($request->dept_name, 0, 2).date('m');
+        $department->dept_name = $request->dept_name;
+        $save = $department->save();
+
+        if($save) {
+            return back()->with('success', 'Department Added Successfully');
+        } else {
+            return back()->with('failed', 'Department Adding Failed');
+        }
     }
 
     /**
@@ -56,7 +67,8 @@ class DepartmentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $departments = Department::find($id);
+        return view('admin.departments.edit', ['departments'=>$departments]);
     }
 
     /**
@@ -68,7 +80,14 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $departments = Department::find($id);
+        $departments->dept_name = $request->dept_name;
+        $upd = $departments->update();
+        if($upd) {
+            return redirect()->route('departments')->with('success', 'Department updated Successfully');
+        } else {
+            return redirect()->route('departments')->with('failed', 'Department Updating Failed');
+        }
     }
 
     /**
@@ -79,6 +98,13 @@ class DepartmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $department = Department::find($id);
+        $del = $department->delete();
+
+        if($del) {
+            return back()->with('success', 'Department Deleted Successfully');
+        } else {
+            return back()->with('failed', 'Department Deleting Failed');
+        }
     }
 }
