@@ -2,23 +2,36 @@
 
 @section('body-contents')
 <div class="container">
+
+    @if(session()->has('success'))
     <div class="row">
         <div class="col-md-12">
-            <div class="alert alert-warning m-b-lg" role="alert">
-                Data has been updated 23 min ago.
+            <div class="alert alert-success m-b-lg" role="alert">
+            {{ session()->get('success') }}
             </div>
         </div>
     </div>
+    @endif
+    @if(session()->has('failed'))
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-danger m-b-lg" role="alert">
+            {{ session()->get('failed') }}
+            </div>
+        </div>
+    </div>
+    @endif
     <div class="row">
         <div class="col-xl">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Add Department</h5>
-                    <form class="needs-validation" novalidate>
+                    <form class="needs-validation" method="POST" action="{{ route('departments.store') }}" novalidate>
+                        @csrf()
                         <div class="form-row">
                             <div class="col-lg-12 mb-3">
                                 <label for="validationCustom01">Name of Department</label>
-                                <input type="text" class="form-control" id="validationCustom01" placeholder="e.g. Education, Health" required>
+                                <input type="text" class="form-control" id="dept_name" name="dept_name" placeholder="e.g. Education, Health" required>
                             </div>
                         </div>
                         <button class="btn btn-primary" type="submit">Add</button>
@@ -43,24 +56,21 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @forelse($departments as $department)
                                 <tr>
-                                    <td>1</td>
-                                    <td>0776</td>
-                                    <td>Sale Management</td>
+                                    <td>{{ $i++ }}</td>
+                                    <td>{{ $department->dept_id }}</td>
+                                    <td>{{ $department->dept_name }}</td>
                                     <td>
-                                        <span class="badge badge-success">Edit</span>
-                                        <span class="badge badge-danger">Delete</span>
+                                        <a href="{{ route('departments.edit', ['id'=>$department->id ]) }}"><span class="badge badge-success">Edit</span></a>
+                                        <a href="{{ route('departments.delete', ['id'=>$department->id ]) }}"><span class="badge badge-danger">Delete</span></a>
                                     </td>
                                 </tr>
+                                @empty
                                 <tr>
-                                    <td>2</td>
-                                    <td>0759</td>
-                                    <td>Dropbox</td>
-                                    <td>
-                                        <span class="badge badge-success">Edit</span>
-                                        <span class="badge badge-danger">Delete</span>
-                                    </td>
+                                    <th colspan="4">No Department added yet.</th>
                                 </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>      
