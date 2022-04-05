@@ -59,7 +59,7 @@
                                 @forelse($departments as $department)
                                 <tr>
                                     <td>{{ $i++ }}</td>
-                                    <td>{{ $department->dept_id }}</td>
+                                    <td>{{ $department->deptid }}</td>
                                     <td>{{ $department->dept_name }}</td>
                                     <td>
                                         <a href="{{ route('departments.edit', ['id'=>$department->id ]) }}"><span class="badge badge-success">Edit</span></a>

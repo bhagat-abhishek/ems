@@ -17,8 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('empid');
             $table->string('emp_name');
-            // $table->string('dept_id');
-            $table->foreignId('dept_id')->constrained('departments');
+            $table->string('deptid');
             $table->string('emp_designation');
             $table->string('emp_current_post');
             $table->string('emp_cadre');

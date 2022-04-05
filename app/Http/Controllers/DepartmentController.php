@@ -37,7 +37,7 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         $department = new Department();
-        $department->dept_id = date('d').substr($request->dept_name, 0, 2).date('m');
+        $department->deptid = date('d').substr($request->dept_name, 0, 2).date('m');
         $department->dept_name = $request->dept_name;
         $save = $department->save();
 

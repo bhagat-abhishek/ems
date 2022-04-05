@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -15,9 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes([
     'register' => false,
@@ -26,4 +25,19 @@ Auth::routes([
     'verify' => false,
 ]);
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+
+Route::get('/departments', [DepartmentController::class, 'index'])->name('departments')->middleware('auth');
+Route::post('/departments/add', [DepartmentController::class, 'store'])->name('departments.store')->middleware('auth');
+Route::get('/departments/edit/{id}', [DepartmentController::class, 'edit'])->name('departments.edit')->middleware('auth');
+Route::post('/departments/update/{id}', [DepartmentController::class, 'update'])->name('departments.update')->middleware('auth');
+Route::get('/departments/delete/{id}', [DepartmentController::class, 'destroy'])->name('departments.delete')->middleware('auth');
+
+Route::get('/employees', [EmployeeController::class, 'index'])->name('employees')->middleware('auth');
+Route::get('/employees/add', [EmployeeController::class, 'create'])->name('employees.add')->middleware('auth');
+Route::post('/employees/add', [EmployeeController::class, 'store'])->name('employees.add')->middleware('auth');
+Route::get('/employees/edit/{id}', [EmployeeController::class, 'edit'])->name('employees.edit')->middleware('auth');
+Route::post('/employees/update/{id}', [EmployeeController::class, 'update'])->name('employees.update')->middleware('auth');
+Route::get('/employees/delete/{id}', [EmployeeController::class, 'destroy'])->name('employees.delete')->middleware('auth');
