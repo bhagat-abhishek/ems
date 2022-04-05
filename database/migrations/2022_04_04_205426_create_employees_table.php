@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('empid');
             $table->string('emp_name');
-            $table->string('dept_id');
+            $table->string('dept_id')->unsigned()->index();;
             $table->string('emp_designation');
             $table->string('emp_current_post');
             $table->string('emp_cadre');
@@ -27,6 +27,8 @@ return new class extends Migration
             $table->string('emp_dor');
             $table->string('emp_pic_url');
             $table->timestamps();
+
+            $table->foreign('dept_id')->references('id')->on('departments')->onDelete('cascade');
         });
     }
 
