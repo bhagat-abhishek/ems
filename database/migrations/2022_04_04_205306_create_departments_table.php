@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('deptid');
             $table->string('name');
-            $table->string('status');
+            $table->string('status')->default('active');
             $table->timestamps();
         });
     }
