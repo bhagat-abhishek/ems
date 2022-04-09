@@ -11,7 +11,14 @@
                         <div class="form-row">
                             <div class="col-lg-12 mb-3">
                                 <label for="dept_name">Name of Department</label>
-                                <input type="text" class="form-control" id="dept_name" name="dept_name" placeholder="e.g. Education, Health" value="{{ $departments->dept_name }}" required>
+                                <input type="text" class="form-control" id="dept_name" name="dept_name" placeholder="e.g. Education, Health" value="{{ $departments->name }}" required>
+                            </div>
+                            <div class="col-lg-12 mb-3">
+                            <select id="dept_status" name="dept_status" class="form-control custom-select">
+                                    <option selected value="{{ $departments->status }}">{{ ucfirst($departments->status) }}</option>
+                                    <option value="active">Active</option>
+                                    <option value="deactive">Deactive</option>
+                                </select>
                             </div>
                         </div>
                         <button class="btn btn-primary" type="submit">Update</button>

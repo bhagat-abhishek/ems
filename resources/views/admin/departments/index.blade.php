@@ -44,14 +44,15 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">All Departmentd</h5>
+                    <h5 class="card-title">All Departments</h5>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th scope="col">Sl. No</th>
-                                    <th scope="col">Dept ID</th>
-                                    <th scope="col">Dept Name</th>
+                                    <th scope="col">Department ID</th>
+                                    <th scope="col">Department Name</th>
+                                    <th scope="col">Department Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -60,7 +61,8 @@
                                 <tr>
                                     <td>{{ $i++ }}</td>
                                     <td>{{ $department->deptid }}</td>
-                                    <td>{{ $department->dept_name }}</td>
+                                    <td>{{ $department->name }}</td>
+                                    <td class="">{{ ucfirst($department->status) }}</td>
                                     <td>
                                         <a href="{{ route('departments.edit', ['id'=>$department->id ]) }}"><span class="badge badge-success">Edit</span></a>
                                         <a href="{{ route('departments.delete', ['id'=>$department->id ]) }}"><span class="badge badge-danger">Delete</span></a>

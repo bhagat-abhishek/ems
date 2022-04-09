@@ -37,8 +37,8 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         $department = new Department();
-        $department->deptid = date('d').substr($request->dept_name, 0, 2).date('m');
-        $department->dept_name = $request->dept_name;
+        $department->deptid = date('d').substr(strtoupper($request->dept_name), 0, 2).date('m').date('h').date('i').date('s');
+        $department->name = $request->dept_name;
         $save = $department->save();
 
         if($save) {
@@ -81,7 +81,8 @@ class DepartmentController extends Controller
     public function update(Request $request, $id)
     {
         $departments = Department::find($id);
-        $departments->dept_name = $request->dept_name;
+        $departments->name = $request->dept_name;
+        $departments->status = $request->dept_status;
         $upd = $departments->update();
         if($upd) {
             return redirect()->route('departments')->with('success', 'Department updated Successfully');
