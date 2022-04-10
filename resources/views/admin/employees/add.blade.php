@@ -18,29 +18,25 @@
                                 <select id="dept_id" name="dept_id" class="form-control custom-select">
                                     <option selected>Choose...</option>
                                     @forelse($departments as $department)
-                                    <option value="{{$department->dept_name}}">{{ $department->dept_name }}</option>
+                                    <option value="{{$department->id}}">{{ $department->name }}</option>
                                     @empty
                                     <option value="">No department added</option>
                                     @endforelse
                                 </select>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="emp_name">Employee DOB</label>
+                                <label for="emp_name">Employee Date Of Birth</label>
                                 <input type="date" class="form-control" id="emp_dob" name="emp_dob" required>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="emp_design">Employee Designation</label>
                                 <input type="text" class="form-control" id="emp_design" name="emp_design" required>
                             </div>
-                            <div class="col-md-4 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="emp_cph">Employee Current Post Held</label>
                                 <input type="text" class="form-control" id="emp_cph" name="emp_cph" required>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="emp_cadre">Employee Cadre</label>
-                                <input type="text" class="form-control" id="emp_cadre" name="emp_cadre" required>
                             </div>
                         </div>
                         <div class="form-row">

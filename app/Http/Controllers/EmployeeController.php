@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Department;
 use App\Models\Employee;
+use App\Models\Department;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class EmployeeController extends Controller
 {
@@ -15,8 +16,27 @@ class EmployeeController extends Controller
      */
     public function index()
     {   
-        $employees = Employee::all();
-        return view('admin.employees.index', ['employees'=>$employees, 'i'=>1]);
+        // $employees = Employee::all();
+        // return view('admin.employees.index', ['employees'=>$employees, 'i'=>1]);
+        return view('admin.employees.index');
+    }
+
+    public function getEmployees(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Employee::latest()->get();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('department', function(Employee $employee) {
+                    return $employee->department->name;
+                })
+                ->addColumn('action', function($row){
+                    $actionBtn = '<a href="/employees/view/'.$row["id"].'" class="edit btn btn-info btn-sm">View</a> <a href="/employees/edit/'.$row["id"].'" class="edit btn btn-success btn-sm">Edit</a> <a href="/employees/delete/'.$row["id"].'" class="delete btn btn-danger btn-sm">Delete</a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
     }
 
     /**
@@ -39,22 +59,21 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $employee = new Employee();
-        $employee->empid = date('md').'EMP'.substr($request->dept_id, 0, 6).'SKM'.date('y');
-        $employee->emp_name = $request->emp_name;
-        $employee->deptid = $request->dept_id;
-        $employee->emp_designation = $request->emp_design;
-        $employee->emp_current_post = $request->emp_cph;
-        $employee->emp_cadre = $request->emp_cadre;
-        $employee->emp_salary = $request->emp_salary;
-        $employee->emp_do_initial_appoinmnet = $request->emp_doia;
-        $employee->emp_dob = $request->emp_dob;
-        $employee->emp_dor = 10-10-2090;
+        $employee->emp_man_id = date('md').'EMP'.$request->dept_id.'SKM'.date('y').rand(0, 9999);
+        $employee->department_id = $request->dept_id;
+        $employee->name = strtolower($request->emp_name);
+        $employee->designation = strtolower($request->emp_design);
+        $employee->dateof_birth = $request->emp_dob;
+        $employee->current_post_held = strtolower($request->emp_cph);
+        $employee->salary = $request->emp_salary;
+        $employee->dateof_initial_appointment = $request->emp_doia;
+        $employee->dateof_retirement = 10-10-2090;
 
         if($request->file()) {
             $fileName = time().'_'.$request->emp_pic->getClientOriginalName();
             $filePath = $request->file('emp_pic')->storeAs('uploads', $fileName, 'public');
             // $fileModel->name = time().'_'.$request->file->getClientOriginalName();
-            $employee->emp_pic_url = '/storage/' . $filePath;
+            $employee->image_url = '/storage/' . $filePath;
         }
 
         $save = $employee->save();
@@ -74,7 +93,8 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
+        $employee = Employee::find($id);
+        return view('admin.employees.show', ['employee'=>$employee]);
     }
 
     /**

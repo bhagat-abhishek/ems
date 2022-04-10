@@ -36,8 +36,12 @@ Route::post('/departments/update/{id}', [DepartmentController::class, 'update'])
 Route::get('/departments/delete/{id}', [DepartmentController::class, 'destroy'])->name('departments.delete')->middleware('auth');
 
 Route::get('/employees', [EmployeeController::class, 'index'])->name('employees')->middleware('auth');
+Route::get('/employees/list', [EmployeeController::class, 'getEmployees'])->name('employees.list')->middleware('auth');
+
+
 Route::get('/employees/add', [EmployeeController::class, 'create'])->name('employees.add')->middleware('auth');
 Route::post('/employees/add', [EmployeeController::class, 'store'])->name('employees.add')->middleware('auth');
 Route::get('/employees/edit/{id}', [EmployeeController::class, 'edit'])->name('employees.edit')->middleware('auth');
 Route::post('/employees/update/{id}', [EmployeeController::class, 'update'])->name('employees.update')->middleware('auth');
 Route::get('/employees/delete/{id}', [EmployeeController::class, 'destroy'])->name('employees.delete')->middleware('auth');
+Route::get('/employees/view/{id}', [EmployeeController::class, 'show'])->name('employees.delete')->middleware('auth');

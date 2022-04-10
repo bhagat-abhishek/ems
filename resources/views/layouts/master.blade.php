@@ -19,6 +19,10 @@
         <link href="{{ asset('assets/plugins/font-awesome/css/all.min.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/plugins/toastr/toastr.min.css') }}" rel="stylesheet">  
 
+        <!-- FOR DataTables -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.11.5/b-2.2.2/b-html5-2.2.2/b-print-2.2.2/datatables.min.css"/>
+ 
+
       
         <!-- Theme Styles -->
         <link href="{{ asset('assets/css/lime.min.css') }}" rel="stylesheet">
@@ -132,5 +136,16 @@
         <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
         <script src="{{ asset('assets/js/lime.min.js') }}"></script>
         <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script>
+
+        <!-- FOR DataTables -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+        <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.11.5/b-2.2.2/b-html5-2.2.2/b-print-2.2.2/datatables.min.js"></script>
+                
+        @yield('footer-contents')
     </body>
 </html>
