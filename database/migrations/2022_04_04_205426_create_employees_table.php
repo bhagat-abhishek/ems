@@ -20,11 +20,11 @@ return new class extends Migration
             $table->integer('address_id')->nullable();
             $table->string('name');
             $table->string('designation');
-            $table->string('dateof_birth');
+            $table->date('dateof_birth');
             $table->string('current_post_held');
             $table->string('salary');
-            $table->string('dateof_initial_appointment');
-            $table->string('dateof_retirement');
+            $table->date('dateof_initial_appointment');
+            $table->date('dateof_retirement');
             $table->string('status')->default('active');
             $table->string('image_url');
             $table->timestamps();
