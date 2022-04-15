@@ -7,7 +7,7 @@
             <div class="card stat-card">
                 <div class="card-body">
                     <h5 class="card-title">Total Departments</h5>
-                    <h2 class="float-right">15</h2>
+                    <h2 class="float-right">{{ \\App\Models\Department::count(); }}</h2>
                     <p>All Department in state.</p>
                 </div>
             </div>

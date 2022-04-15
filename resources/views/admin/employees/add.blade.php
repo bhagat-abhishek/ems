@@ -25,18 +25,30 @@
                                 </select>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="emp_name">Employee Date Of Birth</label>
-                                <input type="date" class="form-control" id="emp_dob" name="emp_dob" required>
+                                <label for="emp_name">Cadre</label>
+                                <select id="emp_cadre" name="emp_cadre" class="form-control custom-select">
+                                    <option selected>Choose...</option>
+                                    <option value="IAS">IAS</option>
+                                    <option value="IPS">IPS</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <label for="emp_design">Employee Designation</label>
-                                <input type="text" class="form-control" id="emp_design" name="emp_design" required>
+                                <select id="emp_design" name="emp_design" class="form-control custom-select">
+                                    <option selected>Choose...</option>
+                                    <option value="chief secretary">Chief Secretary</option>
+                                    <option value="general secretary">General Secretary</option>
+                                </select>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="emp_cph">Employee Current Post Held</label>
-                                <input type="text" class="form-control" id="emp_cph" name="emp_cph" required>
+                            <div class="col-md-4 mb-3">
+                                <label for="emp_cph">Employee Present Posting</label>
+                                <input type="text" class="form-control" id="emp_pp" name="emp_pp" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="emp_dob">Employee Date of Birth</label>
+                                <input type="date" class="form-control" id="emp_dob" name="emp_dob" required>
                             </div>
                         </div>
                         <div class="form-row">
@@ -45,8 +57,8 @@
                                 <input type="date" class="form-control" id="emp_doia" name="emp_doia" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="emp_cph">Employee Salary</label>
-                                <input type="text" class="form-control" id="emp_salary" name="emp_salary" required>
+                                <label for="emp_cph">Employee Date of Promotion</label>
+                                <input type="date" class="form-control" id="emp_dop" name="emp_dop" required>
                             </div>
                         </div>
                         <div class="form-row">

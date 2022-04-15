@@ -15,18 +15,18 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->string('emp_man_id');
-            $table->integer('department_id');
-            $table->integer('address_id')->nullable();
-            $table->string('name');
+            $table->string('emp_unique_id');
+            $table->string('cadre');
             $table->string('designation');
+            $table->string('name');
+            $table->integer('department_id');
+            $table->string('posting_place');
             $table->date('dateof_birth');
-            $table->string('current_post_held');
-            $table->string('salary');
             $table->date('dateof_initial_appointment');
+            $table->date('dateof_promotion');
             $table->date('dateof_retirement');
-            $table->string('status')->default('active');
             $table->string('image_url');
+            $table->string('status')->default('active');
             $table->timestamps();
         });
     }

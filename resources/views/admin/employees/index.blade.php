@@ -35,19 +35,20 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Sl._No</th>
-                                    <th scope="col">Employee ID</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Department</th>
+                                    <th scope="col">EMPLOYEE_UNIQ_ID</th>
+                                    <th scope="col">Cadre Name</th>
                                     <th scope="col">Designation</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Present Place of Posting</th>
+                                    <th scope="col">Department</th>
                                     <th scope="col">Date_Of_Birth</th>
-                                    <th scope="col">Current_Post_Held</th>
-                                    <th scope="col">Salary</th>
                                     <th scope="col">Date_Of_Initial_Appointment</th>
+                                    <th scope="col">Date_Of_Promotion</th>
                                     <th scope="col">Date_Of_Retirement</th>
                                     <th scope="col">Employees_Action_</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="">
 
                             </tbody>
                         </table>
@@ -69,14 +70,15 @@
         ajax: "{{ route('employees.list') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'emp_man_id', name: 'emp_man_id'},
-            {data: 'name', name: 'name'},
-            {data: 'department', name: 'department'},
+            {data: 'emp_unique_id', name: 'emp_unique_id'},
+            {data: 'cadre', name: 'cadre'},
             {data: 'designation', name: 'designation'},
+            {data: 'name', name: 'name'},
+            {data: 'posting_place', name: 'posting_place'},
+            {data: 'department', name: 'department'},
             {data: 'dateof_birth', name: 'dateof_birth'},
-            {data: 'current_post_held', name: 'current_post_held'},
-            {data: 'salary', name: 'salary'},
             {data: 'dateof_initial_appointment', name: 'dateof_initial_appointment'},
+            {data: 'dateof_promotion', name: 'dateof_promotion'},
             {data: 'dateof_retirement', name: 'dateof_retirement'},
             {
                 data: 'action', 

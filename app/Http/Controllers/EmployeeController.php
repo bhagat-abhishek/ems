@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\Department;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -59,15 +61,17 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $employee = new Employee();
-        $employee->emp_man_id = date('md').'EMP'.$request->dept_id.'SKM'.date('y').rand(0, 9999);
+        $employee->emp_unique_id = date('Y').'-'.Str::random(3).'-'.date('m').rand(0, 99999);
         $employee->department_id = $request->dept_id;
         $employee->name = strtolower($request->emp_name);
         $employee->designation = strtolower($request->emp_design);
+        $employee->cadre = strtolower($request->emp_cadre);
+        $employee->posting_place = strtolower($request->emp_pp);
         $employee->dateof_birth = $request->emp_dob;
-        $employee->current_post_held = strtolower($request->emp_cph);
-        $employee->salary = $request->emp_salary;
+
         $employee->dateof_initial_appointment = $request->emp_doia;
-        $employee->dateof_retirement = 10-10-2090;
+        $employee->dateof_promotion = $request->emp_dop;
+        $employee->dateof_retirement = $this->dateof_retirement($request->emp_dob);
 
         if($request->file()) {
             $fileName = time().'_'.$request->emp_pic->getClientOriginalName();
@@ -136,5 +140,10 @@ class EmployeeController extends Controller
         } else {
             return back()->with('failed', 'Employee Deleting Failed');
         }
+    }
+
+    public function dateof_retirement($data) {
+       $newDate = Carbon::createFromFormat('Y-m-d', $data)->addYear(58)->toDateString();
+       return $newDate;
     }
 }
