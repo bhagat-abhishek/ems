@@ -26,6 +26,7 @@
       
         <!-- Theme Styles -->
         <link href="{{ asset('assets/css/lime.min.css') }}" rel="stylesheet">
+        <!-- <link href="{{ asset('assets/css/themes/admin2.css') }}" rel="stylesheet"> -->
         <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -44,6 +45,7 @@
         
         <div class="lime-sidebar">
             <div class="lime-sidebar-inner slimscroll">
+                @if(Auth::check() && Auth::user()->role == 0)
                 <ul class="accordion-menu">
                     <li class="sidebar-title">
                         App
@@ -58,13 +60,19 @@
                         <a href="{{ route('departments') }}"><i class="material-icons">domain</i>Departments</a>
                     </li>
                     <li>
+                        <a href="{{ route('designation') }}"><i class="material-icons">queue</i>Designation</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('cadres') }}"><i class="material-icons">post_add</i>Cadres</a>
+                    </li>
+                    <li>
                         <a href="{{ route('employees') }}"><i class="material-icons">badge</i>Employees</a>
                     </li>
                     <li class="sidebar-title">
                         EMS Management
                     </li>
                     <li>
-                        <a href="{{ route('login') }}"><i class="material-icons">group</i>Users</a>
+                        <a href="{{ route('users') }}"><i class="material-icons">groups</i>Users</a>
                     </li>
                     <li>
                         <a href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -77,6 +85,65 @@
                         </form>
                     </li>
                 </ul>
+                @endif
+                @if(Auth::check() && Auth::user()->role == 1)
+                <ul class="accordion-menu">
+                    <li class="sidebar-title">
+                        App
+                    </li>
+                    <li>
+                        <a href="{{ route('home') }}" class="active"><i class="material-icons">dashboard</i>Dashboard</a>
+                    </li>
+                    <li class="sidebar-title">
+                        Office
+                    </li>
+                    <li>
+                        <a href="{{ route('mod.employees') }}"><i class="material-icons">queue</i>Approvals</a>
+                    </li>
+                    <li class="sidebar-title">
+                        Others
+                    </li>
+                    <li>
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                            <i class="material-icons">logout</i>{{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </li>
+                </ul>
+                @endif
+                @if(Auth::check() && Auth::user()->role == 2)
+                <ul class="accordion-menu">
+                    <li class="sidebar-title">
+                        App
+                    </li>
+                    <li>
+                        <a href="{{ route('home') }}" class="active"><i class="material-icons">dashboard</i>Dashboard</a>
+                    </li>
+                    <li class="sidebar-title">
+                        Office
+                    </li>
+                    <li>
+                        <a href="{{ route('data-entry') }}"><i class="material-icons">queue</i>Employees</a>
+                    </li>
+                    <li class="sidebar-title">
+                        Others
+                    </li>
+                    <li>
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                            <i class="material-icons">logout</i>{{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </li>
+                </ul>
+                @endif
             </div>
         </div>
         

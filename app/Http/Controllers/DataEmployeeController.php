@@ -9,9 +9,8 @@ use App\Models\Designation;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Yajra\DataTables\Facades\DataTables;
 
-class EmployeeController extends Controller
+class DataEmployeeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,34 +18,8 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        // $employees = Employee::all();
-        // return view('admin.employees.index', ['employees'=>$employees, 'i'=>1]);
-        return view('admin.employees.index');
-    }
-
-    public function getEmployees(Request $request)
     {
-        if ($request->ajax()) {
-            $data = Employee::latest()->get();
-            return DataTables::of($data)
-                ->addIndexColumn()
-                ->addColumn('department', function(Employee $employee) {
-                    return $employee->department->name;
-                })
-                ->addColumn('designation', function(Employee $employee) {
-                    return $employee->designation->name;
-                })
-                ->addColumn('cadre', function(Employee $employee) {
-                    return $employee->cadre->name;
-                })
-                ->addColumn('action', function($row){
-                    $actionBtn = '<a href="/employees/view/'.$row["id"].'" class="edit text-lowercase btn btn-info btn-sm">View</a> <a href="/employees/edit/'.$row["id"].'" class="edit text-lowercase btn btn-success btn-sm">Edit</a> <a href="/employees/delete/'.$row["id"].'" class="delete text-lowercase btn btn-danger btn-sm">Delete</a>';
-                    return $actionBtn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
+        //
     }
 
     /**
@@ -59,7 +32,7 @@ class EmployeeController extends Controller
         $department = Department::get();
         $cadre = Cadre::get();
         $designation = Designation::get();
-        return view('admin.employees.add', [
+        return view('admin.entry.emp.add', [
             'departments'=>$department, 
             'cadres'=>$cadre, 
             'designations'=>$designation
@@ -87,6 +60,8 @@ class EmployeeController extends Controller
         $employee->dateof_promotion = $request->emp_dop;
         $employee->dateof_retirement = $this->dateof_retirement($request->emp_dob);
 
+        $employee->status = 'pending';
+
         if($request->file()) {
             $fileName = time().'_'.$request->emp_pic->getClientOriginalName();
             $filePath = $request->file('emp_pic')->storeAs('uploads', $fileName, 'public');
@@ -97,9 +72,9 @@ class EmployeeController extends Controller
         $save = $employee->save();
 
         if($save) {
-            return redirect()->route('employees')->with('success', 'Employeee Added Successfully');
+            return redirect()->route('data-entry')->with('success', 'Employeee Added Successfully');
         } else {
-            return redirect()->route('employees')->with('failed', 'Employee Adding Failed');
+            return redirect()->route('data-entry')->with('failed', 'Employee Adding Failed');
         }
     }
 
@@ -111,8 +86,7 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        $employee = Employee::find($id);
-        return view('admin.employees.show', ['employee'=>$employee]);
+        //
     }
 
     /**
@@ -127,7 +101,7 @@ class EmployeeController extends Controller
         $department = Department::get();
         $cadre = Cadre::get();
         $designation = Designation::get();
-        return view('admin.employees.edit', [
+        return view('admin.entry.emp.edit', [
             'employee'=>$employee,
             'departments'=>$department, 
             'cadres'=>$cadre, 
@@ -156,6 +130,8 @@ class EmployeeController extends Controller
         $employee->dateof_promotion = $request->emp_dop;
         $employee->dateof_retirement = $this->dateof_retirement($request->emp_dob);
 
+        $employee->status = 'pending';
+
         if($request->emp_pic != '') {
             if($request->file()) {
                 $fileName = time().'_'.$request->emp_pic->getClientOriginalName();
@@ -168,9 +144,9 @@ class EmployeeController extends Controller
         $save = $employee->update();
 
         if($save) {
-            return redirect()->route('employees')->with('success', 'Employeee Updated Successfully');
+            return redirect()->route('data-entry')->with('success', 'Employeee Updated Successfully');
         } else {
-            return redirect()->route('employees')->with('failed', 'Employee Updating Failed');
+            return redirect()->route('data-entry')->with('failed', 'Employee Updating Failed');
         }
     }
 
@@ -182,18 +158,11 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        $employee = Employee::find($id);
-        $del = $employee->delete();
-
-        if($del) {
-            return back()->with('success', 'Employee Deleted Successfully');
-        } else {
-            return back()->with('failed', 'Employee Deleting Failed');
-        }
+        //
     }
 
     public function dateof_retirement($data) {
-       $newDate = Carbon::createFromFormat('Y-m-d', $data)->addYear(58)->toDateString();
-       return $newDate;
-    }
+        $newDate = Carbon::createFromFormat('Y-m-d', $data)->addYear(58)->toDateString();
+        return $newDate;
+     }
 }

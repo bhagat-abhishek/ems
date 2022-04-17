@@ -48,7 +48,7 @@
                                     <th scope="col">Employees_Action_</th>
                                 </tr>
                             </thead>
-                            <tbody class="">
+                            <tbody class="text-uppercase">
 
                             </tbody>
                         </table>

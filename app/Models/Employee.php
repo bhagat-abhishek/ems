@@ -15,4 +15,12 @@ class Employee extends Model
     public function department() {
         return $this->belongsTo(Department::class);
     }
+
+    public function designation() {
+        return $this->belongsTo(Designation::class);
+    }
+
+    public function cadre() {
+        return $this->belongsTo(Cadre::class);
+    }
 }

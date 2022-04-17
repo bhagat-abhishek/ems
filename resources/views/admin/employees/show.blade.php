@@ -15,13 +15,13 @@
                         <div class="col-xl-lg">
                             <div class="row">
                                 <div class="col ml-4">
-                                    <h6>EMP ID: {{ ucfirst($employee['emp_man_id']) }}</h6>
+                                    <h6>EMP ID: {{ ucwords($employee['emp_unique_id']) }}</h6>
                                     <h2>{{ ucfirst($employee['name']) }}</h1>
                                     <h5>DEPARTMENT: <strong>{{ ucfirst($employee->department['name']) }}</strong></h5>
-                                    <h5>DESIGNATION: <strong>{{ ucfirst($employee['designation']) }}</strong></h5>
+                                    <h5>DESIGNATION: <strong>{{ ucfirst($employee->designation['name']) }}</strong></h5>
+                                    <h5>CADRE: <strong>{{ ucfirst($employee->cadre['name']) }}</strong></h5>
                                     <h5>DOB: <strong>{{ ucfirst($employee['dateof_birth']) }}</strong></h5>
-                                    <h5>CURRENT POST HELD: <strong>{{ ucfirst($employee['current_post_held']) }}</strong></h5>
-                                    <h5>SALARY: <strong>{{ ucfirst($employee['salary']) }}</strong></h5>
+                                    <h5>CURRENT POST HELD: <strong>{{ ucfirst($employee['posting_place']) }}</strong></h5>
                                     <h5>INITIAL APPOINMENT DATE: <strong>{{ ucfirst($employee['dateof_initial_appointment']) }}</strong></h5>
                                     <h5>RETIREMENT DATE: <strong>{{ ucfirst($employee['dateof_retirement']) }}</strong></h5>
                                 </div>

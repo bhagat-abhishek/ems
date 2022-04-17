@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->string('emp_unique_id');
-            $table->string('cadre');
-            $table->string('designation');
+            $table->integer('cadre_id');
+            $table->integer('designation_id');
             $table->string('name');
             $table->integer('department_id');
             $table->string('posting_place');

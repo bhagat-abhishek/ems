@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Add Employees</h5>
-                    <form class="needs-validation" method="POST" action="{{ route('employees.add') }}" enctype="multipart/form-data" novalidate> @csrf()
+                    <form class="needs-validation" method="POST" action="{{ route('employees.add.data') }}" enctype="multipart/form-data" novalidate> @csrf()
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
                                 <label for="emp_name">Employee Name</label>
@@ -74,7 +74,7 @@
                             </div>
                         </div>
                         <button class="btn btn-primary" type="submit">Add</button>
-                        <a href="{{ route('employees') }}" class="btn btn-secondary" type="submit">Back</a>
+                        <a href="{{ route('data-entry') }}" class="btn btn-secondary" type="submit">Back</a>
                     </form>
                 </div>
             </div>
